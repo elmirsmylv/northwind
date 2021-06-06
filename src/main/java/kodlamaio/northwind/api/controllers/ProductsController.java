@@ -20,14 +20,34 @@ public class ProductsController {
         this.productService = productService;
     }
 
-    @GetMapping("/get_all")
+    @GetMapping("/getAll")
     public DataResult<List<Product>> getAll(){
 
         return this.productService.getAll();
     }
 
+    @GetMapping("/getAllByPage")
+    public DataResult<List<Product>> getAll(int pageNo, int pageSize){
+        return this.productService.getAll(pageNo,pageSize);
+    }
+
+    @GetMapping("/getAllSorted")
+    public DataResult<List<Product>> getAllSorted(){
+        return this.productService.getAllSorted();
+    }
+
     @PostMapping("/add")
     public Result add(@RequestBody Product product){
         return this.productService.add(product);
+    }
+
+    @GetMapping("/getByProductName")
+    public DataResult<Product> getByProductName(@RequestParam String productName){
+        return this.productService.getByProductName(productName);
+    }
+
+    @GetMapping("/getByProductNameAndCategoryId")
+    public DataResult<Product> getByProductNameAndCategoryId(@RequestParam String productName, @RequestParam int categoryId){
+        return this.productService.getByProductNameAndCategoryId(productName, categoryId);
     }
 }
